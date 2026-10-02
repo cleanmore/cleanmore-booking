@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>エアコンクリーニング ご予約フォーム｜クリーンモア（長崎）</title>
+<meta name="description" content="長崎のエアコンクリーニング専門店クリーンモアのご予約フォーム。台数とオプションを選ぶと概算金額がすぐわかります。">
+<style>
+  :root{
+    --bg:#f4f8f7; --card:#ffffff; --ink:#1f2d2b; --sub:#5b6b68; --line:#dfe8e6;
+    --main:#13897a; --main-d:#0d6b5f; --main-l:#e3f4f1; --accent:#f08a24; --accent-l:#fff3e6;
+    --err:#c8372d; --radius:14px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--bg);color:var(--ink);font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP",Meiryo,sans-serif;line-height:1.7;font-size:16px}
+  .wrap{max-width:640px;margin:0 auto;padding:20px 16px 60px}
+  header .badges{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
+  .badge{background:var(--accent-l);color:#b55c0c;font-size:12px;font-weight:700;padding:4px 10px;border-radius:999px}
+  h1{font-size:24px;line-height:1.4;margin:0 0 8px}
+  .lead{color:var(--sub);font-size:14px;margin:0 0 20px}
+  .card{background:var(--card);border-radius:var(--radius);padding:20px 18px;margin-bottom:18px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+  .card h2{font-size:18px;margin:0 0 14px;padding-bottom:10px;border-bottom:2px solid var(--main-l)}
+  .row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px dashed var(--line)}
+  .row:last-child{border-bottom:none}
+  .row .name{font-weight:700}
+  .row .price{display:block;color:var(--sub);font-size:13px;font-weight:400}
+  .stepper{display:flex;align-items:center;gap:6px;flex-shrink:0}
+  .stepper button{width:40px;height:40px;border-radius:50%;border:2px solid var(--main);background:#fff;color:var(--main);font-size:22px;line-height:1;cursor:pointer}
+  .stepper button:active{background:var(--main-l)}
+  .stepper output{min-width:28px;text-align:center;font-size:18px;font-weight:700}
+  .subhead{font-weight:700;margin:16px 0 0;color:var(--main-d)}
+  .note{font-size:13px;color:var(--sub)}
+  .total{background:var(--main-l);border-radius:12px;padding:14px 16px;margin-top:14px}
+  .total .label{font-weight:700}
+  .total .amount{font-size:30px;font-weight:800;color:var(--main-d)}
+  .total .amount small{font-size:14px;font-weight:400;color:var(--sub)}
+  .total .detail{font-size:13px;color:var(--sub);margin:4px 0 0;padding-left:1.2em}
+  .field{margin-bottom:16px}
+  .field label,.field .legend{display:block;font-weight:700;margin-bottom:6px}
+  .req{background:var(--err);color:#fff;font-size:11px;padding:1px 6px;border-radius:4px;margin-left:6px;vertical-align:middle}
+  .opt{background:#e9eeed;color:var(--sub);font-size:11px;padding:1px 6px;border-radius:4px;margin-left:6px;vertical-align:middle}
+  input[type=text],input[type=tel],input[type=email],input[type=date],select,textarea{width:100%;font-size:16px;padding:11px 12px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);font-family:inherit}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--main)}
+  textarea{min-height:90px;resize:vertical}
+  .pair{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .choices{display:flex;flex-wrap:wrap;gap:8px}
+  .choices label{display:flex;align-items:center;gap:6px;font-weight:400;border:1.5px solid var(--line);border-radius:10px;padding:8px 12px;cursor:pointer;margin:0;background:#fff}
+  .choices input{accent-color:var(--main);width:18px;height:18px}
+  .choices label:has(input:checked){border-color:var(--main);background:var(--main-l)}
+  .error-msg{color:var(--err);font-size:13px;margin-top:4px;display:none}
+  .invalid .error-msg{display:block}
+  .invalid input,.invalid select{border-color:var(--err)}
+  .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+  .submit{display:block;width:100%;font-size:18px;font-weight:800;color:#fff;background:var(--accent);border:none;border-radius:999px;padding:16px;cursor:pointer;box-shadow:0 3px 0 #c96a12}
+  .submit:disabled{opacity:.6;cursor:wait}
+  .after{font-size:13px;color:var(--sub);margin-top:12px}
+  .done{display:none;text-align:center}
+  .done h2{border:none}
+  .done .id{font-size:20px;font-weight:800;color:var(--main-d)}
+  footer{text-align:center;font-size:13px;color:var(--sub);margin-top:24px}
+  footer a{color:var(--main-d)}
+  .sticky{position:sticky;bottom:0;background:rgba(255,255,255,.96);border-top:1px solid var(--line);padding:10px 16px;display:flex;justify-content:space-between;align-items:center;font-weight:700;margin:0 -16px}
+  .sticky span{color:var(--main-d);font-size:20px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="badges">
+      <span class="badge">女性スタッフ在籍</span>
+      <span class="badge">当日対応OK</span>
+      <span class="badge">エコ洗剤使用</span>
+    </div>
+    <h1>エアコンクリーニング<br>ご予約フォーム</h1>
+    <p class="lead">台数とオプションを選ぶと概算金額が出ます。送信後すぐに確認メールが届き、作業日は担当者からご連絡のうえ確定します。</p>
+  </header>
+
+  <form id="bookingForm" novalidate>
+    <!-- ===== 1. 台数とオプション ===== -->
+    <section class="card">
+      <h2>1. 台数とオプションを選ぶ</h2>
+      <div id="items"></div>
+
+      <div class="total" aria-live="polite">
+        <div class="label">💰 概算金額</div>
+        <div class="amount"><span id="totalText">¥0</span> <small>（税込・駐車場代別）</small></div>
+        <ul class="detail" id="totalDetail"></ul>
+      </div>
+      <p class="note">💡 概算です。汚れによる追加料金は基本的に発生しません（特殊な事情がある場合は作業前に必ずご説明します）。</p>
+    </section>
+
+    <!-- ===== 2. エアコンの状態 ===== -->
+    <section class="card">
+      <h2>2. エアコンの状態を教えてください</h2>
+      <div class="field">
+        <span class="legend">気になっていること <span class="opt">任意・複数可</span></span>
+        <div class="choices" data-name="symptoms">
+          <label><input type="checkbox" value="ニオイ">ニオイ</label>
+          <label><input type="checkbox" value="カビ・黒い点">カビ・黒い点</label>
+          <label><input type="checkbox" value="効きが悪い">効きが悪い</label>
+          <label><input type="checkbox" value="水漏れ">水漏れ</label>
+          <label><input type="checkbox" value="異音">異音</label>
+          <label><input type="checkbox" value="電気代">電気代</label>
+          <label><input type="checkbox" value="アレルギー・健康面">アレルギー・健康面</label>
+          <label><input type="checkbox" value="定期的なお手入れ">定期的なお手入れ</label>
+        </div>
+      </div>
+      <div class="pair">
+        <div class="field">
+          <label for="maker">メーカー <span class="opt">任意</span></label>
+          <select id="maker" name="maker">
+            <option value="">分からない</option>
+            <option>ダイキン</option><option>パナソニック</option><option>三菱電機</option>
+            <option>日立</option><option>東芝</option><option>シャープ</option>
+            <option>富士通ゼネラル</option><option>コロナ</option><option>その他</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="age">使用年数 <span class="opt">任意</span></label>
+          <select id="age" name="age">
+            <option value="">分からない</option>
+            <option>3年未満</option><option>3〜5年</option><option>6〜9年</option><option>10年以上</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label for="lastCleaning">前回のプロのクリーニング <span class="opt">任意</span></label>
+        <select id="lastCleaning" name="lastCleaning">
+          <option value="">選択してください</option>
+          <option>初めて</option><option>1年以内</option><option>1〜2年前</option><option>3年以上前</option><option>覚えていない</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- ===== 3. ご予約情報 ===== -->
+    <section class="card">
+      <h2>3. ご予約情報を入力する</h2>
+
+      <div class="field" data-required>
+        <label for="name">お名前<span class="req">必須</span></label>
+        <input type="text" id="name" name="name" autocomplete="name" placeholder="例）長崎 花子">
+        <div class="error-msg">お名前を入力してください</div>
+      </div>
+      <div class="field" data-required data-type="tel">
+        <label for="tel">電話番号<span class="req">必須</span></label>
+        <input type="tel" id="tel" name="tel" autocomplete="tel" inputmode="tel" placeholder="例）090-1234-5678">
+        <div class="error-msg">電話番号を正しく入力してください</div>
+      </div>
+      <div class="field" data-required data-type="email">
+        <label for="email">メールアドレス<span class="req">必須</span> <span class="note">確認メールの送付先</span></label>
+        <input type="email" id="email" name="email" autocomplete="email" placeholder="例）hanako@example.com">
+        <div class="error-msg">メールアドレスを正しく入力してください</div>
+      </div>
+      <div class="field" data-required>
+        <label for="city">市町<span class="req">必須</span></label>
+        <select id="city" name="city">
+          <option value="">選択してください</option>
+          <optgroup label="市">
+            <option>長崎市</option><option>佐世保市</option><option>諫早市</option><option>大村市</option>
+            <option>島原市</option><option>雲仙市</option><option>南島原市</option><option>西海市</option>
+            <option>平戸市</option><option>松浦市</option><option>五島市</option><option>対馬市</option><option>壱岐市</option>
+          </optgroup>
+          <optgroup label="町">
+            <option>長与町</option><option>時津町</option><option>東彼杵町</option><option>川棚町</option>
+            <option>波佐見町</option><option>佐々町</option><option>小値賀町</option><option>新上五島町</option>
+          </optgroup>
+          <option value="長崎県外">長崎県外（備考にご記入ください）</option>
+        </select>
+        <div class="error-msg">市町を選択してください</div>
+      </div>
+      <div class="field">
+        <label for="zip">郵便番号 <span class="opt">任意</span></label>
+        <input type="text" id="zip" name="zip" inputmode="numeric" autocomplete="postal-code" placeholder="例）850-0000">
+      </div>
+      <div class="field" data-required>
+        <label for="address">ご住所<span class="req">必須</span></label>
+        <input type="text" id="address" name="address" autocomplete="street-address" placeholder="町名・番地・建物名・部屋番号">
+        <div class="error-msg">ご住所を入力してください</div>
+      </div>
+      <div class="field" data-required data-group="housing">
+        <span class="legend">お住まいのタイプ<span class="req">必須</span></span>
+        <div class="choices" data-name="housing" data-single>
+          <label><input type="radio" name="housing" value="戸建て">戸建て</label>
+          <label><input type="radio" name="housing" value="マンション・アパート">マンション・アパート</label>
+          <label><input type="radio" name="housing" value="店舗・事務所など">店舗・事務所など</label>
+        </div>
+        <div class="error-msg">お住まいのタイプを選択してください</div>
+      </div>
+
+      <div id="dates"></div>
+      <p class="note">※ご希望日での対応が難しい場合は、1〜2日以内に日程再調整のご連絡をいたします。</p>
+
+      <div class="field" data-required data-group="payment">
+        <span class="legend">お支払い方法<span class="req">必須</span></span>
+        <div class="choices" data-name="payment" data-single>
+          <label><input type="radio" name="payment" value="当日現金">作業当日・現金</label>
+          <label><input type="radio" name="payment" value="当日PayPay">作業当日・PayPay</label>
+          <label><input type="radio" name="payment" value="当日カード（Square）">作業当日・クレジットカード</label>
+        </div>
+        <div class="error-msg">お支払い方法を選択してください</div>
+      </div>
+      <div class="field" data-required data-group="parking">
+        <span class="legend">駐車場<span class="req">必須</span> <span class="note">駐車場代は別途実費</span></span>
+        <div class="choices" data-name="parking" data-single>
+          <label><input type="radio" name="parking" value="敷地内に駐車可">敷地内に駐車可</label>
+          <label><input type="radio" name="parking" value="近隣コインパーキング">近隣コインパーキング</label>
+          <label><input type="radio" name="parking" value="相談したい">相談したい</label>
+        </div>
+        <div class="error-msg">駐車場について選択してください</div>
+      </div>
+      <div class="field">
+        <span class="legend">エアコン以外のお掃除も相談したい <span class="opt">任意・料金は担当者からご案内</span></span>
+        <div class="choices" data-name="otherCleaning">
+          <label><input type="checkbox" value="浴室">お風呂・浴室</label>
+          <label><input type="checkbox" value="キッチン">キッチン・水回り</label>
+          <label><input type="checkbox" value="洗濯機">洗濯機</label>
+          <label><input type="checkbox" value="その他">その他</label>
+        </div>
+      </div>
+      <div class="field" data-required>
+        <label for="source">クリーンモアを何で知りましたか？<span class="req">必須</span></label>
+        <select id="source" name="source">
+          <option value="">選択してください</option>
+          <option>Google検索</option><option>Googleマップ</option><option>Instagram</option><option>LINE</option>
+          <option>くらしのマーケット</option><option>ミツモア</option><option>チラシ・ポスティング</option>
+          <option>家族・知人の紹介</option><option>以前利用した</option><option>その他</option>
+        </select>
+        <div class="error-msg">選択してください</div>
+      </div>
+      <div class="field">
+        <label for="referral">紹介コード <span class="opt">任意・ご家族やお知り合いから紹介された方</span></label>
+        <input type="text" id="referral" name="referral">
+      </div>
+      <div class="field">
+        <label for="note">ご要望・備考 <span class="opt">任意</span></label>
+        <textarea id="note" name="note" placeholder="例）2台目は寝室です。午前中が希望です。"></textarea>
+      </div>
+      <div class="field">
+        <span class="legend">お得な情報 <span class="opt">任意</span></span>
+        <div class="choices"><label><input type="checkbox" id="optin" checked>次回のおすすめ時期やキャンペーンをメールで受け取る</label></div>
+      </div>
+
+      <!-- スパム対策（人には見えない欄） -->
+      <div class="hp" aria-hidden="true"><label>会社名<input type="text" id="website" tabindex="-1" autocomplete="off"></label></div>
+
+      <button type="submit" class="submit" id="submitBtn">この内容で予約する</button>
+      <p class="after">送信後、確認メールをお送りします。作業日は担当者よりご連絡のうえ確定します。</p>
+      <p class="error-msg" id="sendError" style="text-align:center"></p>
+    </section>
+  </form>
+
+  <section class="card done" id="done">
+    <h2>ご予約を受け付けました</h2>
+    <p>受付番号</p>
+    <p class="id" id="doneId"></p>
+    <p>確認メールをお送りしました。届かない場合は迷惑メールフォルダをご確認いただくか、お電話ください。</p>
+  </section>
+
+  <footer>
+    <div><strong id="shopName"></strong>（ありがとうグループ加盟店）</div>
+    <div>☎ <a id="shopTelLink" href="#"><span id="shopTel"></span></a>　受付 <span id="shopHours"></span></div>
+  </footer>
+
+  <div class="sticky" id="sticky">概算 <span id="stickyTotal">¥0</span></div>
+</div>
+
+<script>
+/* ================================================================
+   設定（ここだけ書き換えればOK）
+   ================================================================ */
+const CONFIG = {
+  // GASを「ウェブアプリ」としてデプロイしたURLを貼り付け
+  GAS_URL: 'ここにGASのウェブアプリURLを貼り付け',
+  SHOP_NAME: 'エアコンクリーニング クリーンモア',
+  SHOP_TEL: '000-0000-0000',          // ← 実際の電話番号に変更
+  SHOP_HOURS: '9:00〜18:00',
+  // 料金（税込）
+  PRICES: {
+    base:    { label: 'エアコン（壁掛け）', price: 8900, min: 1, desc: '8,900円/台' },
+    autoClean:{ label: 'うち、お掃除機能付き', price: 6000, desc: '＋6,000円/台', capByBase: true },
+    set3:    { label: '3点セット', price: 7000, desc: '防カビ抗菌コート＋室外機＋ドレンホース｜7,000円/台（別々なら9,500円）', option: true },
+    coat:    { label: '防カビ・抗菌コート', price: 3000, desc: '3,000円/台', option: true },
+    outdoor: { label: '室外機クリーニング', price: 4000, desc: '4,000円/台', option: true },
+    drain:   { label: 'ドレンホース洗浄', price: 2500, desc: '2,500円/台', option: true }
+  }
+};
+
+/* ================================================================ */
+const qty = {};
+const yen = n => '¥' + n.toLocaleString('ja-JP');
+
+function buildItems(){
+  const box = document.getElementById('items');
+  let optionHeadDone = false;
+  for (const [key, it] of Object.entries(CONFIG.PRICES)){
+    qty[key] = it.min || 0;
+    if (it.option && !optionHeadDone){
+      const h = document.createElement('p');
+      h.className = 'subhead'; h.textContent = 'オプション（台数分お選びください）';
+      box.appendChild(h); optionHeadDone = true;
+    }
+    const row = document.createElement('div');
+    row.className = 'row';
+    row.innerHTML = `<div><span class="name">${it.label}</span><span class="price">${it.desc}</span></div>
+      <div class="stepper"><button type="button" aria-label="${it.label}を減らす" data-k="${key}" data-d="-1">−</button>
+      <output id="q_${key}">${qty[key]}</output>
+      <button type="button" aria-label="${it.label}を増やす" data-k="${key}" data-d="1">＋</button></div>`;
+    box.appendChild(row);
+  }
+  box.addEventListener('click', e => {
+    const b = e.target.closest('button[data-k]'); if (!b) return;
+    const k = b.dataset.k, it = CONFIG.PRICES[k];
+    let v = qty[k] + Number(b.dataset.d);
+    const max = (it.capByBase || it.option) ? qty.base : 20;
+    v = Math.max(it.min || 0, Math.min(max, v));
+    qty[k] = v;
+    // 台数を減らしたら上限を超えた項目を調整
+    if (k === 'base') for (const [kk, ii] of Object.entries(CONFIG.PRICES))
+      if ((ii.capByBase || ii.option) && qty[kk] > qty.base) qty[kk] = qty.base;
+    render();
+  });
+}
+
+function calc(){
+  let total = 0; const lines = [];
+  for (const [k, it] of Object.entries(CONFIG.PRICES)){
+    if (!qty[k]) continue;
+    const sub = it.price * qty[k]; total += sub;
+    lines.push(`${it.label} × ${qty[k]}台：${yen(sub)}`);
+  }
+  return { total, lines };
+}
+
+function render(){
+  for (const k in qty) document.getElementById('q_' + k).textContent = qty[k];
+  const { total, lines } = calc();
+  document.getElementById('totalText').textContent = yen(total);
+  document.getElementById('stickyTotal').textContent = yen(total);
+  document.getElementById('totalDetail').innerHTML = lines.map(l => `<li>${l}</li>`).join('');
+}
+
+function buildDates(){
+  const box = document.getElementById('dates');
+  const tomorrow = new Date(Date.now() + 864e5).toISOString().slice(0,10);
+  ['第一','第二','第三'].forEach((n, i) => {
+    const req = i === 0;
+    box.insertAdjacentHTML('beforeend', `
+      <div class="field" ${req ? 'data-required' : ''}>
+        <span class="legend">作業日 ${n}希望${req ? '<span class="req">必須</span>' : '<span class="opt">任意</span>'}</span>
+        <div class="pair">
+          <input type="date" id="date${i+1}" min="${tomorrow}" aria-label="${n}希望日">
+          <select id="time${i+1}" aria-label="${n}希望時間">
+            <option value="">時間帯</option><option>9時〜12時</option><option>12時〜15時</option>
+            <option>15時〜18時</option><option>いつでも可</option><option>上記以外で相談</option>
+          </select>
+        </div>
+        <div class="error-msg">${n}希望の日付と時間帯を選択してください</div>
+      </div>`);
+  });
+}
+
+const val = id => (document.getElementById(id)?.value || '').trim();
+const checked = name => [...document.querySelectorAll(`[data-name="${name}"] input:checked`)].map(i => i.value);
+
+function validate(){
+  let firstBad = null;
+  document.querySelectorAll('[data-required]').forEach(f => {
+    let ok = true;
+    const group = f.dataset.group;
+    if (group) ok = checked(group).length > 0;
+    else {
+      const inputs = f.querySelectorAll('input,select');
+      inputs.forEach(i => { if (!i.value.trim()) ok = false; });
+      const v = inputs[0]?.value.trim() || '';
+      if (ok && f.dataset.type === 'email') ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+      if (ok && f.dataset.type === 'tel') ok = v.replace(/[^\d]/g,'').length >= 10;
+    }
+    f.classList.toggle('invalid', !ok);
+    if (!ok && !firstBad) firstBad = f;
+  });
+  if (firstBad) firstBad.scrollIntoView({behavior:'smooth', block:'center'});
+  return !firstBad;
+}
+
+function collect(){
+  const { total } = calc();
+  return {
+    type: 'booking',
+    name: val('name'), tel: val('tel'), email: val('email'),
+    city: val('city'), zip: val('zip'), address: val('address'),
+    housing: checked('housing')[0] || '',
+    units: qty.base, autoClean: qty.autoClean,
+    set3: qty.set3, coat: qty.coat, outdoor: qty.outdoor, drain: qty.drain,
+    estimate: total,
+    symptoms: checked('symptoms').join('、'),
+    maker: val('maker'), age: val('age'), lastCleaning: val('lastCleaning'),
+    date1: val('date1'), time1: val('time1'),
+    date2: val('date2'), time2: val('time2'),
+    date3: val('date3'), time3: val('time3'),
+    payment: checked('payment')[0] || '', parking: checked('parking')[0] || '',
+    otherCleaning: checked('otherCleaning').join('、'),
+    source: val('source'), referral: val('referral'), note: val('note'),
+    optin: document.getElementById('optin').checked ? 'はい' : 'いいえ',
+    website: val('website'), // ハニーポット
+    ua: navigator.userAgent, page: location.href,
+    utm: location.search.replace(/^\?/, '')
+  };
+}
+
+document.getElementById('bookingForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const errBox = document.getElementById('sendError');
+  errBox.style.display = 'none';
+  if (!validate()) return;
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true; btn.textContent = '送信中…';
+  try {
+    const res = await fetch(CONFIG.GAS_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // CORSのプリフライトを避ける
+      body: JSON.stringify(collect())
+    });
+    const json = await res.json();
+    if (!json.ok) throw new Error(json.error || '送信に失敗しました');
+    document.getElementById('bookingForm').style.display = 'none';
+    document.getElementById('sticky').style.display = 'none';
+    document.getElementById('doneId').textContent = json.id;
+    document.getElementById('done').style.display = 'block';
+    window.scrollTo({top:0, behavior:'smooth'});
+  } catch (err) {
+    errBox.textContent = `送信できませんでした。お手数ですがお電話（${CONFIG.SHOP_TEL}）でご連絡ください。`;
+    errBox.style.display = 'block';
+    btn.disabled = false; btn.textContent = 'この内容で予約する';
+  }
+});
+
+// 入力したらエラー表示を消す
+document.addEventListener('input', e => e.target.closest('.field')?.classList.remove('invalid'));
+document.addEventListener('change', e => e.target.closest('.field')?.classList.remove('invalid'));
+
+document.getElementById('shopName').textContent = CONFIG.SHOP_NAME;
+document.getElementById('shopTel').textContent = CONFIG.SHOP_TEL;
+document.getElementById('shopTelLink').href = 'tel:' + CONFIG.SHOP_TEL.replace(/[^\d]/g,'');
+document.getElementById('shopHours').textContent = CONFIG.SHOP_HOURS;
+buildItems(); buildDates(); render();
+</script>
+</body>
+</html>

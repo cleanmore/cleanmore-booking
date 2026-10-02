@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>売上入力｜クリーンモア</title>
+<style>
+  :root{--bg:#f4f6f8;--card:#fff;--ink:#1f2a33;--sub:#5d6b77;--line:#dde3e8;--main:#2b5f9e;--main-l:#e7eff9;--ok:#13897a;--err:#c8372d}
+  *{box-sizing:border-box} html,body{margin:0}
+  body{background:var(--bg);color:var(--ink);font-family:"Hiragino Kaku Gothic ProN","Hiragino Sans","Noto Sans JP",Meiryo,sans-serif;line-height:1.6;font-size:16px}
+  .wrap{max-width:560px;margin:0 auto;padding:20px 16px 60px}
+  h1{font-size:22px;margin:0 0 4px}
+  .lead{color:var(--sub);font-size:14px;margin:0 0 16px}
+  .card{background:var(--card);border-radius:14px;padding:18px;margin-bottom:16px;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+  .field{margin-bottom:14px}
+  label,.legend{display:block;font-weight:700;margin-bottom:5px;font-size:15px}
+  .req{color:var(--err);font-size:12px;margin-left:4px}
+  input,select,textarea{width:100%;font-size:16px;padding:10px 12px;border:1.5px solid var(--line);border-radius:10px;background:#fff;color:var(--ink);font-family:inherit}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--main)}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+  .calc{background:var(--main-l);border-radius:10px;padding:10px 14px;font-weight:700}
+  .calc span{font-size:22px;color:var(--main)}
+  button{width:100%;font-size:17px;font-weight:800;color:#fff;background:var(--main);border:none;border-radius:999px;padding:14px;cursor:pointer}
+  button:disabled{opacity:.6}
+  .msg{margin-top:10px;font-weight:700;text-align:center;display:none}
+  .msg.ok{color:var(--ok);display:block} .msg.ng{color:var(--err);display:block}
+  .note{font-size:13px;color:var(--sub)}
+  #log{font-size:13px;color:var(--sub);padding-left:1.2em;margin:6px 0 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>売上入力（スタッフ用）</h1>
+  <p class="lead">ミツモア・くらしのマーケットなど、自社フォーム以外のお仕事の売上をここから入力すると、予約データと合わせて集計されます。</p>
+
+  <form id="f" class="card" novalidate>
+    <div class="field">
+      <label for="pass">合言葉<span class="req">必須</span></label>
+      <input type="password" id="pass" autocomplete="off">
+      <span class="note">この端末に記憶されます</span>
+    </div>
+    <div class="grid">
+      <div class="field">
+        <label for="workDate">作業日<span class="req">必須</span></label>
+        <input type="date" id="workDate" required>
+      </div>
+      <div class="field">
+        <label for="channel">受注経路<span class="req">必須</span></label>
+        <select id="channel" required>
+          <option value="">選択</option>
+          <option>ミツモア</option><option>くらしのマーケット</option><option>おうちにプロ</option>
+          <option>ユアマ</option><option>ありがとうグループ経由</option><option>電話・LINE直接</option>
+          <option>リピート直接</option><option>紹介</option><option>自社予約フォーム</option><option>その他</option>
+        </select>
+      </div>
+    </div>
+    <div class="grid">
+      <div class="field"><label for="customer">お客様名</label><input id="customer" placeholder="例）長崎様"></div>
+      <div class="field"><label for="tel">電話番号</label><input id="tel" type="tel" inputmode="tel" placeholder="リピート判定に使用"></div>
+    </div>
+    <div class="field">
+      <label for="city">市町</label>
+      <select id="city">
+        <option value="">選択</option>
+        <option>長崎市</option><option>佐世保市</option><option>諫早市</option><option>大村市</option>
+        <option>島原市</option><option>雲仙市</option><option>南島原市</option><option>西海市</option>
+        <option>平戸市</option><option>松浦市</option><option>五島市</option><option>対馬市</option><option>壱岐市</option>
+        <option>長与町</option><option>時津町</option><option>東彼杵町</option><option>川棚町</option>
+        <option>波佐見町</option><option>佐々町</option><option>小値賀町</option><option>新上五島町</option><option>長崎県外</option>
+      </select>
+    </div>
+    <div class="grid3">
+      <div class="field"><label for="units">台数<span class="req">必須</span></label><input id="units" type="number" min="0" inputmode="numeric" value="1"></div>
+      <div class="field"><label for="autoClean">うちお掃除機能付き</label><input id="autoClean" type="number" min="0" inputmode="numeric" value="0"></div>
+      <div class="field"><label for="optionCount">オプション数</label><input id="optionCount" type="number" min="0" inputmode="numeric" value="0"></div>
+    </div>
+    <div class="field">
+      <label for="options">オプション内容</label>
+      <input id="options" placeholder="例）3点セット×1、室外機×1">
+    </div>
+    <div class="grid">
+      <div class="field"><label for="amount">売上（税込）<span class="req">必須</span></label><input id="amount" type="number" min="0" inputmode="numeric" placeholder="円"></div>
+      <div class="field"><label for="fee">手数料</label><input id="fee" type="number" min="0" inputmode="numeric" placeholder="円（なければ0）"></div>
+    </div>
+    <div class="calc field">手取り：<span id="net">¥0</span></div>
+    <div class="grid">
+      <div class="field">
+        <label for="payment">支払方法</label>
+        <select id="payment"><option value="">選択</option><option>現金</option><option>PayPay</option><option>カード（Square）</option><option>プラットフォーム決済</option><option>振込</option><option>その他</option></select>
+      </div>
+      <div class="field"><label for="staff">担当</label><input id="staff" placeholder="担当者名"></div>
+    </div>
+    <div class="field"><label for="bookingId">予約ID（自社フォームの場合）</label><input id="bookingId" placeholder="例）CM-20261002-1234"></div>
+    <div class="field"><label for="memo">メモ</label><textarea id="memo" rows="2" placeholder="追加作業、次回提案など"></textarea></div>
+    <button type="submit" id="btn">登録する</button>
+    <p class="msg" id="msg"></p>
+    <ul id="log"></ul>
+  </form>
+</div>
+<script>
+const GAS_URL = 'ここにGASのウェブアプリURLを貼り付け'; // index.html と同じURL
+
+const $ = id => document.getElementById(id);
+const store = {
+  get(k){ try { return localStorage.getItem(k) || ''; } catch(e){ return ''; } },
+  set(k,v){ try { localStorage.setItem(k,v); } catch(e){} }
+};
+$('pass').value = store.get('cm_pass');
+$('staff').value = store.get('cm_staff');
+$('workDate').value = new Date(Date.now() + 9*3600e3).toISOString().slice(0,10);
+
+const updateNet = () => { $('net').textContent = '¥' + ((+$('amount').value||0) - (+$('fee').value||0)).toLocaleString('ja-JP'); };
+['amount','fee'].forEach(id => $(id).addEventListener('input', updateNet));
+
+$('f').addEventListener('submit', async e => {
+  e.preventDefault();
+  const msg = $('msg'); msg.className = 'msg';
+  const missing = [['pass','合言葉'],['workDate','作業日'],['channel','受注経路'],['units','台数'],['amount','売上']]
+    .filter(([id]) => !$(id).value.trim()).map(([,n]) => n);
+  if (missing.length){ msg.textContent = '未入力：' + missing.join('、'); msg.className = 'msg ng'; return; }
+  const data = { type:'sales' };
+  ['pass','workDate','channel','customer','tel','city','units','autoClean','optionCount','options','amount','fee','payment','staff','bookingId','memo']
+    .forEach(id => data[id] = $(id).value.trim());
+  $('btn').disabled = true; $('btn').textContent = '送信中…';
+  try {
+    const res = await fetch(GAS_URL, { method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body: JSON.stringify(data) });
+    const json = await res.json();
+    if (!json.ok) throw new Error(json.error);
+    store.set('cm_pass', data.pass); store.set('cm_staff', data.staff);
+    msg.textContent = '登録しました（' + json.id + '）'; msg.className = 'msg ok';
+    $('log').insertAdjacentHTML('afterbegin', `<li>${data.workDate} ${data.channel} ${data.customer||''} ¥${(+data.amount).toLocaleString('ja-JP')}</li>`);
+    ['customer','tel','options','amount','fee','bookingId','memo'].forEach(id => $(id).value = '');
+    $('units').value = 1; $('autoClean').value = 0; $('optionCount').value = 0; updateNet();
+  } catch(err) {
+    msg.textContent = '登録できませんでした：' + (err.message || '通信エラー'); msg.className = 'msg ng';
+  } finally {
+    $('btn').disabled = false; $('btn').textContent = '登録する';
+  }
+});
+</script>
+</body>
+</html>
