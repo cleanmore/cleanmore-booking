@@ -262,7 +262,7 @@
       </div>
 
       <!-- スパム対策（人には見えない欄） -->
-      <div class="hp" aria-hidden="true"><label>会社名<input type="text" id="website" tabindex="-1" autocomplete="off"></label></div>
+      <div class="hp" aria-hidden="true"><label>この欄は入力しないでください<input type="text" id="cm_hp_x7" name="cm_hp_x7" tabindex="-1" autocomplete="off"></label></div>
 
       <button type="submit" class="submit" id="submitBtn">この内容で予約する</button>
       <p class="after">送信後、確認メールをお送りします。作業日は担当者よりご連絡のうえ確定します。</p>
@@ -423,7 +423,7 @@ function collect(){
     otherCleaning: checked('otherCleaning').join('、'),
     source: val('source'), referral: val('referral'), note: val('note'), reasons: checked('reasons').join('、'), reasonNote: val('reasonNote'),
     optin: document.getElementById('optin').checked ? 'はい' : 'いいえ',
-    website: val('website'), // ハニーポット
+    website: val('cm_hp_x7'), // ハニーポット
     ua: navigator.userAgent, page: location.href,
     utm: location.search.replace(/^\?/, '')
   };
