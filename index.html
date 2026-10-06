@@ -234,6 +234,21 @@
         <div class="error-msg">選択してください</div>
       </div>
       <div class="field">
+        <span class="legend">クリーンモアを選んでいただいた理由 <span class="opt">任意・複数可</span></span>
+        <div class="choices" data-name="reasons">
+          <label><input type="checkbox" value="女性スタッフがいる">女性スタッフがいる</label>
+          <label><input type="checkbox" value="口コミ・評価が良い">口コミ・評価が良い</label>
+          <label><input type="checkbox" value="料金がわかりやすい">料金がわかりやすい</label>
+          <label><input type="checkbox" value="当日・急ぎでも対応してくれる">当日・急ぎでも対応してくれる</label>
+          <label><input type="checkbox" value="エコ洗剤を使っている">エコ洗剤を使っている</label>
+          <label><input type="checkbox" value="地元・長崎の業者">地元・長崎の業者</label>
+          <label><input type="checkbox" value="家族・知人のすすめ">家族・知人のすすめ</label>
+          <label><input type="checkbox" value="以前利用して満足した">以前利用して満足した</label>
+          <label><input type="checkbox" value="その他">その他</label>
+        </div>
+        <textarea id="reasonNote" name="reasonNote" style="margin-top:8px" placeholder="よろしければ、決め手になったことを教えてください"></textarea>
+      </div>
+      <div class="field">
         <label for="referral">紹介コード <span class="opt">任意・ご家族やお知り合いから紹介された方</span></label>
         <input type="text" id="referral" name="referral">
       </div>
@@ -406,7 +421,7 @@ function collect(){
     date3: val('date3'), time3: val('time3'),
     payment: checked('payment')[0] || '', parking: checked('parking')[0] || '',
     otherCleaning: checked('otherCleaning').join('、'),
-    source: val('source'), referral: val('referral'), note: val('note'),
+    source: val('source'), referral: val('referral'), note: val('note'), reasons: checked('reasons').join('、'), reasonNote: val('reasonNote'),
     optin: document.getElementById('optin').checked ? 'はい' : 'いいえ',
     website: val('website'), // ハニーポット
     ua: navigator.userAgent, page: location.href,
