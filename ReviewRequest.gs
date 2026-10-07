@@ -25,8 +25,8 @@ const REVIEW = {
 
 /** 初回に1回だけ実行：設定の追加・毎日の自動実行の登録・今までの完了分を「対象外」にする */
 function setupReviewRequest() {
-  ensureSetting_('REVIEW_URL', '');
-  ensureSetting_('REVIEW_MAIL_ENABLED', 'はい');
+  ensureSetting_('REVIEW_URL', '', 'Googleの口コミ投稿用URL（ビジネスプロフィールの「口コミを依頼」からコピー）');
+  ensureSetting_('REVIEW_MAIL_ENABLED', 'はい', '完了後のお礼＋口コミ依頼メールを送るか（はい／いいえ）');
 
   ScriptApp.getProjectTriggers()
     .filter(t => t.getHandlerFunction() === 'sendReviewRequests')
@@ -147,7 +147,7 @@ function bookingTable_() {
   return { sheet, col, rows };
 }
 
-// 「設定」シートは A列＝項目名、B列＝値 の前提
+// 「設定」シートは A列＝キー、B列＝値、C列＝説明 の前提
 function getSetting_(key) {
   const sheet = SpreadsheetApp.getActive().getSheetByName(REVIEW.SETTINGS_SHEET);
   if (!sheet) return '';
@@ -155,9 +155,9 @@ function getSetting_(key) {
   return row ? String(row[1]).trim() : '';
 }
 
-function ensureSetting_(key, value) {
+function ensureSetting_(key, value, note) {
   const sheet = SpreadsheetApp.getActive().getSheetByName(REVIEW.SETTINGS_SHEET);
   if (!sheet) throw new Error(`シート「${REVIEW.SETTINGS_SHEET}」が見つかりません`);
   const exists = sheet.getDataRange().getValues().some(r => String(r[0]).trim() === key);
-  if (!exists) sheet.appendRow([key, value]);
+  if (!exists) sheet.appendRow([key, value, note]);
 }
