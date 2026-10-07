@@ -5,6 +5,44 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>エアコンクリーニング ご予約フォーム｜クリーンモア（長崎）</title>
 <meta name="description" content="長崎のエアコンクリーニング専門店クリーンモアのご予約フォーム。台数とオプションを選ぶと概算金額がすぐわかります。">
+<link rel="canonical" href="https://cleanmore.github.io/cleanmore-booking/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="エアコンクリーニング クリーンモア（長崎）｜ご予約フォーム">
+<meta property="og:description" content="壁掛けエアコン8,900円/台。女性スタッフ在籍・当日対応OK・エコ洗剤使用。長崎市・諫早市・長与町・時津町対応。">
+<meta property="og:url" content="https://cleanmore.github.io/cleanmore-booking/">
+<meta property="og:locale" content="ja_JP">
+<!-- MEO：Googleにお店の情報を伝える構造化データ。GBP（Googleビジネスプロフィール）と同じ内容にそろえること -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HVACBusiness",
+  "name": "エアコンクリーニング クリーンモア",
+  "url": "https://cleanmore.github.io/cleanmore-booking/",
+  "telephone": "+81-80-6441-7040",
+  "priceRange": "¥8,900〜",
+  "description": "長崎のエアコンクリーニング専門店。女性スタッフ在籍・当日対応OK・エコ洗剤使用。",
+  "address": { "@type": "PostalAddress", "addressRegion": "長崎県", "addressCountry": "JP" },
+  "areaServed": [
+    { "@type": "City", "name": "長崎市" },
+    { "@type": "City", "name": "諫早市" },
+    { "@type": "City", "name": "長与町" },
+    { "@type": "City", "name": "時津町" },
+    { "@type": "City", "name": "宮崎市" },
+    { "@type": "City", "name": "都城市" }
+  ],
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    "opens": "09:00", "closes": "18:00"
+  },
+  "paymentAccepted": "現金, PayPay, クレジットカード",
+  "makesOffer": [
+    { "@type": "Offer", "price": "8900", "priceCurrency": "JPY", "itemOffered": { "@type": "Service", "name": "エアコンクリーニング（壁掛け）" } },
+    { "@type": "Offer", "price": "14900", "priceCurrency": "JPY", "itemOffered": { "@type": "Service", "name": "エアコンクリーニング（お掃除機能付き）" } },
+    { "@type": "Offer", "price": "4000", "priceCurrency": "JPY", "itemOffered": { "@type": "Service", "name": "室外機クリーニング" } }
+  ]
+}
+</script>
 <style>
   :root{
     --bg:#f4f8f7; --card:#ffffff; --ink:#1f2d2b; --sub:#5b6b68; --line:#dfe8e6;
@@ -458,6 +496,10 @@ document.getElementById('shopName').textContent = CONFIG.SHOP_NAME;
 document.getElementById('shopTel').textContent = CONFIG.SHOP_TEL;
 document.getElementById('shopTelLink').href = 'tel:' + CONFIG.SHOP_TEL.replace(/[^\d]/g,'');
 document.getElementById('shopHours').textContent = CONFIG.SHOP_HOURS;
+// ?utm=gbp などで来た人は「何で知りましたか？」を自動選択（GBPのウェブサイト欄・チラシQRに付ける）
+const UTM_SOURCE = { gbp: 'Googleマップ', flyer: 'チラシ・ポスティング', instagram: 'Instagram', line: 'LINE' };
+const utmSource = UTM_SOURCE[new URLSearchParams(location.search).get('utm')];
+if (utmSource) document.getElementById('source').value = utmSource;
 buildItems(); buildDates(); render();
 </script>
 </body>
