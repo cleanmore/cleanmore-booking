@@ -6,7 +6,7 @@
    ・予約データ＝予約フォームから来た直接のお客様だけ。sales.html で入れたポータルの仕事には送らない
    ・送ったかどうかは「予約データ」の右端の列「口コミ依頼」に記録（同じ人に二重送信しない）
 
-   初回の準備：setupReviewRequest を1回実行 → 「設定」シートの REVIEW_URL に口コミURLを入れる
+   初回の準備：setupReviewRequest を1回実行するだけ（口コミURLは「設定」シートに自動で入る）
    ================================================================ */
 
 const REVIEW = {
@@ -15,6 +15,8 @@ const REVIEW = {
   DONE_STATUS: '完了',
   MARK_HEADER: '口コミ依頼',
   SEND_HOUR: 19,
+  // Googleの口コミ投稿用URL（setup で「設定」シートの REVIEW_URL に入る。変えるときは設定シート側を直す）
+  DEFAULT_REVIEW_URL: 'https://g.page/r/CUCvDqe59pnVEBM/review',
   // 列は見出しの文字で探す（見出しを変えたらここも合わせる）
   HEADERS: {
     status: ['ステータス'],
@@ -25,7 +27,7 @@ const REVIEW = {
 
 /** 初回に1回だけ実行：設定の追加・毎日の自動実行の登録・今までの完了分を「対象外」にする */
 function setupReviewRequest() {
-  ensureSetting_('REVIEW_URL', '', 'Googleの口コミ投稿用URL（ビジネスプロフィールの「口コミを依頼」からコピー）');
+  ensureSetting_('REVIEW_URL', REVIEW.DEFAULT_REVIEW_URL, 'Googleの口コミ投稿用URL（ビジネスプロフィールの「口コミを依頼」からコピー）');
   ensureSetting_('REVIEW_MAIL_ENABLED', 'はい', '完了後のお礼＋口コミ依頼メールを送るか（はい／いいえ）');
 
   ScriptApp.getProjectTriggers()
@@ -46,8 +48,7 @@ function setupReviewRequest() {
 
   SpreadsheetApp.getUi().alert(
     '口コミ依頼メールの準備ができました。\n\n' +
-    '1. 「設定」シートの REVIEW_URL に Googleの口コミ投稿用URL を貼ってください\n' +
-    '2. testReviewMail を実行すると、自分宛てにお試しメールが届きます\n\n' +
+    'testReviewMail を実行すると、自分宛てにお試しメールが届きます。\n\n' +
     `毎日${REVIEW.SEND_HOUR}時ごろ自動で送ります。（導入前の完了 ${skipped} 件は送りません）`
   );
 }
