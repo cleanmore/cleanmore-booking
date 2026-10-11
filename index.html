@@ -16,7 +16,7 @@
 {
   "@context": "https://schema.org",
   "@type": "HVACBusiness",
-  "name": "エアコンクリーニング クリーンモア",
+  "name": "クリーンモア",
   "url": "https://cleanmore.github.io/cleanmore-booking/",
   "telephone": "+81-80-6441-7040",
   "priceRange": "¥8,900〜",
@@ -26,15 +26,12 @@
     { "@type": "City", "name": "長崎市" },
     { "@type": "City", "name": "諫早市" },
     { "@type": "City", "name": "長与町" },
-    { "@type": "City", "name": "時津町" },
-    { "@type": "City", "name": "宮崎市" },
-    { "@type": "City", "name": "都城市" }
+    { "@type": "City", "name": "時津町" }
   ],
-  "openingHoursSpecification": {
-    "@type": "OpeningHoursSpecification",
-    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
-    "opens": "09:00", "closes": "18:00"
-  },
+  "openingHoursSpecification": [
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Thursday","Friday","Saturday","Sunday"], "opens": "09:00", "closes": "17:00" },
+    { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Tuesday","Wednesday"], "opens": "09:00", "closes": "16:00" }
+  ],
   "paymentAccepted": "現金, PayPay, クレジットカード",
   "makesOffer": [
     { "@type": "Offer", "price": "8900", "priceCurrency": "JPY", "itemOffered": { "@type": "Service", "name": "エアコンクリーニング（壁掛け）" } },
@@ -198,9 +195,6 @@
           <option value="">選択してください</option>
           <optgroup label="長崎県">
             <option>長崎市</option><option>諫早市</option><option>長与町</option><option>時津町</option>
-          </optgroup>
-          <optgroup label="宮崎県">
-            <option>宮崎市</option><option>都城市</option>
           </optgroup>
           <option value="長崎県外">上記以外の地域（備考にご記入ください）</option>
         </select>
