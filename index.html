@@ -254,7 +254,7 @@
         <select id="source" name="source">
           <option value="">選択してください</option>
           <option>Google検索</option><option>Googleマップ</option><option>Instagram</option><option>LINE</option>
-          <option>くらしのマーケット</option><option>ミツモア</option><option>チラシ・ポスティング</option>
+          <option>くらしのマーケット</option><option>ミツモア</option><option>チラシ・ポスティング</option><option>広告</option>
           <option>家族・知人の紹介</option><option>以前利用した</option><option>その他</option>
         </select>
         <div class="error-msg">選択してください</div>
@@ -491,7 +491,7 @@ document.getElementById('shopTel').textContent = CONFIG.SHOP_TEL;
 document.getElementById('shopTelLink').href = 'tel:' + CONFIG.SHOP_TEL.replace(/[^\d]/g,'');
 document.getElementById('shopHours').textContent = CONFIG.SHOP_HOURS;
 // ?utm=gbp などで来た人は「何で知りましたか？」を自動選択（GBPのウェブサイト欄・チラシQRに付ける）
-const UTM_SOURCE = { gbp: 'Googleマップ', flyer: 'チラシ・ポスティング', instagram: 'Instagram', line: 'LINE' };
+const UTM_SOURCE = { gbp: 'Googleマップ', flyer: 'チラシ・ポスティング', instagram: 'Instagram', line: 'LINE', ad: '広告' };
 const utmSource = UTM_SOURCE[new URLSearchParams(location.search).get('utm')];
 if (utmSource) document.getElementById('source').value = utmSource;
 buildItems(); buildDates(); render();
